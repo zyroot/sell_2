@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/nav::common_header(~{::title})">
+    <title>商品修改页面</title>
+</head>
+<body>
+<div id="wrapper" class="toggled">
+    <!--边栏sidebar-->
+    <div th:replace="common/nav::#sidebar-wrapper"></div>
+    <!--主要内容content-->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <!--表单-->
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form role="form" method="post" th:action="@{/seller/product/doAdd}">
+                        <div class="form-group">
+                            <label >名称</label>
+                            <input type="text" class="form-control" name="productName"   />
+                        </div>
+                        <div class="form-group">
+                            <label >价格</label>
+                            <input type="text" class="form-control" name="productPrice"  />
+                        </div>
+                        <div class="form-group">
+                            <label >库存</label>
+                            <input type="text" class="form-control" name="productStock"  />
+                        </div>
+                        <div class="form-group">
+                            <label >描述</label>
+                            <input type="text" class="form-control" name="productDescription"  />
+                        </div>
+                        <div class="form-group">
+                            <label >图片</label>
+                            <img />
+                            <input type="file">
+                            <input type="hidden" name="productIcon"   id="" />
+                        </div>
+                        <div class="form-group">
+                            <label >类目</label>
+                            <select name="categoryType" class="form-control">
+                                <option th:each="category:${categoryList}" th:value="${category.categoryType}">
+                                    [[${category.categoryName}]]
+                                </option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="productId" >
+                        <button type="submit" class="btn btn-default">新增提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

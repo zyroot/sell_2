@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/nav::common_header(~{::title})">
+    <title>商品修改页面</title>
+</head>
+<body>
+<div id="wrapper" class="toggled">
+    <!--边栏sidebar-->
+    <div th:replace="common/nav::#sidebar-wrapper"></div>
+    <!--主要内容content-->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <!--表单-->
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form role="form" method="post" th:action="@{/seller/product/doEdit}">
+                        <div class="form-group">
+                            <label >名称</label>
+                            <input type="text" class="form-control" name="productName"  th:value="${productInfo.productName}" />
+                        </div>
+                        <div class="form-group">
+                            <label >价格</label>
+                            <input type="text" class="form-control" name="productPrice" th:value="${productInfo.productPrice}" />
+                        </div>
+                        <div class="form-group">
+                            <label >库存</label>
+                            <input type="text" class="form-control" name="productStock" th:value="${productInfo.productStock}" />
+                        </div>
+                        <div class="form-group">
+                            <label >描述</label>
+                            <input type="text" class="form-control" name="productDescription" th:value="${productInfo.productDescription}" />
+                        </div>
+                        <div class="form-group">
+                            <label >图片</label>
+                            <img th:src="${productInfo.productIcon}"/>
+                            <input type="file">
+                            <input type="hidden" name="productIcon" th:value="${productInfo.productIcon}"  id="" />
+                        </div>
+                        <div class="form-group">
+                            <label >类目</label>
+                            <!--<input type="file" id="exampleInputFile" />-->
+                            <!--<input type="password" class="form-control" id="dd" />-->
+                            <select name="categoryType" class="form-control">
+                                <option th:each="category:${categoryList}" th:selected="${category.categoryType eq productInfo.categoryType}" th:value="${category.categoryType}">
+                                [[${category.categoryName}]]
+                                </option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="productId" th:value="${productInfo.productId}">
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

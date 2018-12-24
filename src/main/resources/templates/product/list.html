@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/nav::common_header(~{::title})">
+    <title>商品列表页</title>
+</head>
+<body>
+<div id="wrapper" class="toggled">
+    <!--边栏sidebar-->
+    <div th:replace="common/nav::#sidebar-wrapper"></div>
+    <!--主要内容content-->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>商品id  </th>
+                            <th>名字</th>
+                            <th>图片</th>
+                            <th>单价</th>
+                            <th>库存</th>
+                            <th>描述</th>
+                            <th>介绍</th>
+                            <th>类目</th>
+                            <th>创建时间</th>
+                            <th>修改时间</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product : ${productInfoPage.getContent()}">
+                            <td th:text="${product.productId}">Onions</td>
+                            <td th:text="${product.productName}">Onions</td>
+                            <td >
+                                <img src="" th:src="@{${product.productIcon}}">
+                            </td>
+                            <td th:text="${product.productPrice}">Onions</td>
+                            <td th:text="${product.productStock}">Onions</td>
+                            <td th:text="${product.productDescription}">Onions</td>
+                            <td th:text="${product.productDescription}">Onions</td>
+                            <td th:text="${category.categoryName}" th:each="category:${categoryList}" th:if="${category.categoryType eq product.categoryType }"></td>
+                            <td th:text="${product.createTime}">Onions</td>
+                            <td th:text="${product.updateTime}">Onions</td>
+                            <!--<td th:text="${order.inStock}? #{true} : #{false}">-->
+                            <!--yes</td>-->
+                            <td><a th:href="@{'/seller/product/edit?productId='+${product.productId}}">修改</a></td>
+                            <td><a th:href="@{'/seller/product/up_off?productId='+${product.productId}}" th:text="${product.productStatusEnum().code == 1}?'上架':'下架' ">上架</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    <!--
+                    orderDtoPage.getNumber()当前页从0开始的
+                    实际项目中是从一开始的
+                    所以：orderDtoPage.getNumber() 表示上一页
+                    orderDtoPage.getNumber() +1 表示当前页
+                    orderDtoPage.getNumber() +2 表示下一页
+                    -->
+                    <div class="col-md-12 column">
+                        <ul class="pagination pull-right">
+                            <li th:classappend="${productInfoPage.getNumber() eq 0}?'disabled':''">
+                                <a href="#" th:href="@{'/seller/order/list?page='+${productInfoPage.getNumber()}+'&size='+${size}}">上一页</a>
+                            </li>
+                            <!-- 迭代生成页码 -->
+                            <li class="page-item" th:each="i : ${#numbers.sequence(1,productInfoPage.getTotalPages())}"
+                                th:classappend="${(productInfoPage.getNumber() + 1) eq i} ? 'active' : ''" >
+                                <a class="page-link" th:attr="pageIndex=${i} - 1" th:href="@{'/seller/order/list?page='+${i}+'&size='+${size}}">
+                                    <span th:text="${i}"></span>
+                                </a>
+                            </li>
+                            <li th:classappend="${productInfoPage.getNumber() eq (productInfoPage.getTotalPages()-1)}?'disabled':''">
+                                <a href="#" th:href="@{'/seller/order/list?page='+${productInfoPage.getNumber()+2}+'&size='+${size}}">下一页</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

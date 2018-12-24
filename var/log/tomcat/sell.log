@@ -1,0 +1,14 @@
+2018-12-07 11:18:02.549  INFO 5876 --- [main] com.eim.Sell2ApplicationTests            : Starting Sell2ApplicationTests on Zy-PC with PID 5876 (started by Zy in E:\sell_2)
+2018-12-07 11:18:02.550  INFO 5876 --- [main] com.eim.Sell2ApplicationTests            : No active profile set, falling back to default profiles: default
+2018-12-07 11:18:02.828  INFO 5876 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@445b295b: startup date [Fri Dec 07 11:18:02 CST 2018]; root of context hierarchy
+2018-12-07 11:18:04.413  INFO 5876 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@445b295b: startup date [Fri Dec 07 11:18:02 CST 2018]; root of context hierarchy
+2018-12-07 11:18:04.476  INFO 5876 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-12-07 11:18:04.477  INFO 5876 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-12-07 11:18:04.505  INFO 5876 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-07 11:18:04.505  INFO 5876 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-07 11:18:04.543  INFO 5876 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-12-07 11:18:04.575  WARN 5876 --- [main] .t.AbstractTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2018-12-07 11:18:04.949  INFO 5876 --- [main] com.eim.Sell2ApplicationTests            : Started Sell2ApplicationTests in 2.667 seconds (JVM running for 3.341)
+2018-12-07 11:18:04.987  INFO 5876 --- [main] com.eim.Sell2ApplicationTests            : ddd
+2018-12-07 11:18:04.987 ERROR 5876 --- [main] com.eim.Sell2ApplicationTests            : ddd
+2018-12-07 11:18:04.991  INFO 5876 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@445b295b: startup date [Fri Dec 07 11:18:02 CST 2018]; root of context hierarchy

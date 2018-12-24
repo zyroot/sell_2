@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    日志的级别；
+	由低到高   trace<debug<info<warn<error
+-->
+<configuration>
+
+    <!--用来定义变量值的标签， 有两个属性，name和value；其中name的值是变量的名称，
+    value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量-->
+    <property name="logback.logdir" value="C:/Users/Zy/Desktop/sell"/>
+
+    <!--控制台输出配置项-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--展示-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--log文件 每天输出日志文件-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--LevelFilter 这个类，等级过滤 -->
+        <!--配置过滤规则 加上这filter表示，只捕获该ERROR 及其以上的异常-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--命中使用 中立规则（命中error时，使用其他appender）-->
+            <onMatch>DENY</onMatch>
+            <!--没命中 接收（没有命中error时，当前appender进行接收处理）-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <!--日志输出格式-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径  在日志的文件名上 带时间 %d-->
+            <fileNamePattern>${logback.logdir}/info.%d.log</fileNamePattern>
+            <!--只保留最近90天的日志-->
+            <maxHistory>90</maxHistory>
+            <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+        </rollingPolicy>
+    </appender>
+
+    <!--error文件日志路径-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--ThresholdFilter 这个类是根据范围过滤-->
+        <!--加上这filter表示，只捕获该ERROR 及其以上的异常-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <!--日志输出格式-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径-->
+            <fileNamePattern>${logback.logdir}/error.%d.log</fileNamePattern>
+            <!--只保留最近90天的日志-->
+            <maxHistory>90</maxHistory>
+            <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+        </rollingPolicy>
+    </appender>
+
+    <!--日志级别-->
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <!--指定-->
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+</configuration>

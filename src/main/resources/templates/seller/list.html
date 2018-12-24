@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/nav::common_header(~{::title})">
+    <title>订单列表页</title>
+</head>
+<body>
+    <div id="wrapper" class="toggled">
+        <!--边栏sidebar-->
+        <div th:replace="common/nav::#sidebar-wrapper"></div>
+        <!--主要内容content-->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>订单id  </th>
+                                <th>姓名</th>
+                                <th>手机号</th>
+                                <th>地址</th>
+                                <th>金额</th>
+                                <th>订单状态</th>
+                                <th>支付状态</th>
+                                <th>创建时间</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="order : ${orderDtoPage.getContent()}">
+                                <td th:text="${order.orderId}">Onions</td>
+                                <td th:text="${order.buyerName}">2.41</td>
+                                <td th:text="${order.buyerPhone}">2.41</td>
+                                <td th:text="${order.buyerAddress}">2.41</td>
+                                <td th:text="${order.orderAmount}">2.41</td>
+                                <td th:text="${order.getOrderStatusEnum().msg}">2.41</td>
+                                <td th:text="${order.getPayStatusEnum().msg}">2.41</td>
+                                <td th:text="${order.create_time}">2.41</td>
+                                <!--<td th:text="${order.inStock}? #{true} : #{false}">-->
+                                <!--yes</td>-->
+                                <td><a th:href="@{'/seller/order/detail?orderId='+${order.orderId}}">详情</a></td>
+                                <td><a th:href="@{'/seller/order/cancel?orderId='+${order.orderId}}" th:if="${order.getOrderStatusEnum().code == 0} ">取消</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--分页-->
+                        <!--
+                        orderDtoPage.getNumber()当前页从0开始的
+                        实际项目中是从一开始的
+                        所以：orderDtoPage.getNumber() 表示上一页
+                        orderDtoPage.getNumber() +1 表示当前页
+                        orderDtoPage.getNumber() +2 表示下一页
+                        -->
+                        <div class="col-md-12 column">
+                            <ul class="pagination pull-right">
+                                <li th:classappend="${orderDtoPage.getNumber() eq 0}?'disabled':''">
+                                    <a href="#" th:href="@{'/seller/order/list?page='+${orderDtoPage.getNumber()}+'&size='+${size}}">上一页</a>
+                                </li>
+                                <!-- 迭代生成页码 -->
+                                <li class="page-item" th:each="i : ${#numbers.sequence(1,orderDtoPage.getTotalPages())}"
+                                    th:classappend="${(orderDtoPage.getNumber() + 1) eq i} ? 'active' : ''" >
+                                    <a class="page-link" th:attr="pageIndex=${i} - 1" th:href="@{'/seller/order/list?page='+${i}+'&size='+${size}}">
+                                        <span th:text="${i}"></span>
+                                    </a>
+                                </li>
+                                <li th:classappend="${orderDtoPage.getNumber() eq (orderDtoPage.getTotalPages()-1)}?'disabled':''">
+                                    <a href="#" th:href="@{'/seller/order/list?page='+${orderDtoPage.getNumber()+2}+'&size='+${size}}">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -33,6 +33,8 @@ public class DruidConfig {
         //自己创建冲突2.0
 
         //自己创建冲突4.0
+
+        //自己制造冲突3.0
         return new DruidDataSource();
     }
 

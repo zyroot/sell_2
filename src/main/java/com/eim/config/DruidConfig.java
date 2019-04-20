@@ -28,7 +28,6 @@ public class DruidConfig {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        //手动创建冲突
 
         //自己创建冲突2.0
 
